@@ -45,8 +45,15 @@ text = alt.Chart(df).mark_text().encode(
     alt.datum.rank < 20
 )
 
+ratings = text.encode(
+    text = 'Rotten_Tomatoes_Rating:Q'
 
-rect | text
+)
+moviename = text.encode(
+    text = "Title:N"
+)
+
+rect | ratings | moviename
     </py-script>
 </body>
 </html>
