@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <title>Pyscript & Altair</title>
+    <py-env>
+- altair
+- pandas
+- vega_datasets
+    </py-env>
+</head>
+<body>
+    <h1 style="font-size:3em">Exploring IMDB Movies dataset with Pyscript</h1>
+    <div id="dashboard"></div>
+    <py-script output = "dashboard">
+import altair as alt
+from vega_datasets import data
+
+df = data.movies.url
+    </py-script>
+</body>
+</html>
