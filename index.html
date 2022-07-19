@@ -23,6 +23,30 @@ import altair as alt
 from vega_datasets import data
 
 df = data.movies.url
+brush = alt.selection_interval()
+
+rect = alt.Chart(df).mark_bar().encode(
+    alt.X('IMDB_Rating:Q', bin = True),
+    alt.Y('Rotten_Tomatoes_Rating:Q', bin=True),
+    color = alt.condition(brush, "Rotten_Tomatoes_Rating:Q", alt.value("lightgray"))
+).add_selection(
+    brush
+)
+
+text = alt.Chart(df).mark_text().encode(
+    y=alt.Y('row_number:O', axis=None),
+).transform_window(
+    row_number='row_number()'
+).transform_filter(
+    brush
+).transform_window(
+    rank='rank(row_number)'
+).transform_filter(
+    alt.datum.rank < 20
+)
+
+
+rect | text
     </py-script>
 </body>
 </html>
